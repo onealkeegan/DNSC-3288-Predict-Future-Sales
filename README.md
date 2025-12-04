@@ -10,9 +10,9 @@
 * (https://github.com/onealkeegan/DNSC-3288-Predict-Future-Sales/blob/main/DNSC_3288_Predict_Future_Sales.ipynb) 
 
 ### Intended Use
-* **Primary intended uses**: This model is an *example* probability of default classifier, with an *example* use case for determining eligibility for a credit line increase.
-* **Primary intended users**: Students in GWU DNSC 6301 bootcamp.
-* **Out-of-scope use cases**: Any use beyond an educational example is out-of-scope.
+* **Primary intended uses**: This model's intended use is to predict next-month item sales for a retail planning Kaggle competition, allow student's to practice times-series forcasting 
+* **Primary intended users**: Students in GWU DNSC 3288 class, future "Predict Future Sales" competitors
+* **Out-of-scope use cases**: Predictions for markets outside the original Kaggle dataset ex. groceries
 
 ### Training Data
 
@@ -32,38 +32,47 @@
 | **PAY_AMT1 - PAY_AMT6** | inputs | float | amount of previous payment; PAY_AMT1 = amount paid in September, 2005; PAY_AMT2 = amount paid in August, 2005; ...; PAY_AMT6 = amount paid in April, 2005 |
 | **DELINQ_NEXT**| target | int | whether a customer's next payment is delinquent (late), 1 = late; 0 = on-time |
 
-* **Source of training data**: GWU Blackboard, email `jphall@gwu.edu` for more information
-* **How training data was divided into training and validation data**: 50% training, 25% validation, 25% test
+* **Source of training data**: *Predict Future Sales* competition
+* **How training data was divided into training and validation data**: all training besides month 33 for validation and month 34 for testing
 * **Number of rows in training and validation data**:
-  * Training rows: 15,000
-  * Validation rows: 7,500
+  * Training rows: ~2.9M
+  * Validation rows: ~214K
 
 ### Test Data
-* **Source of test data**: GWU Blackboard, email `jphall@gwu.edu` for more information
-* **Number of rows in test data**: 7,500
-* **State any differences in columns between training and test data**: None
+* **Source of test data**: sales_train.csv, items.csv, shops.csv, categories.csv from *Predict Future Sales* competition
+* **Number of rows in test data**: 214,200
+* **State any differences in columns between training and test data**: Test does not contain item_cnt (the target variable)
 
 ### Model details
-* **Columns used as inputs in the final model**: 'LIMIT_BAL',
-       'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'BILL_AMT1',
-       'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6',
-       'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6'
-* **Column(s) used as target(s) in the final model**: 'DELINQ_NEXT'
-* **Type of model**: Decision Tree 
-* **Software used to implement the model**: Python, scikit-learn
-* **Version of the modeling software**: 0.22.2.post1
+* **Columns used as inputs in the final model**:
+* Lag features (item_cnt_lag1to12, category_cnt_lag1to12, group_cnt_lag1to12)
+* Price aggregates
+* Count aggregates
+* Age features
+* Categorical identifiers (item_id, shop_id, category_id)
+* Month, shop city, item groups
+* **Column(s) used as target(s) in the final model**: "item_cnt"
+* **Type of model**: LightGBM Regression
+* **Software used to implement the model**: Python, LightGBM, NumPy, Pandas, Plotly, SHAP
+* **Version of the modeling software**: lightgbm==4.6.0
 * **Hyperparameters or other settings of your model**: 
 ```
-DecisionTreeClassifier(ccp_alpha=0.0, class_weight=None, criterion='gini',
-                       max_depth=6, max_features=None, max_leaf_nodes=None,
-                       min_impurity_decrease=0.0, min_impurity_split=None,
-                       min_samples_leaf=1, min_samples_split=2,
-                       min_weight_fraction_leaf=0.0, presort='deprecated',
-                       random_state=12345, splitter='best')
+params = {
+    'objective': 'regression',
+    'metric': 'rmse',
+    'num_leaves': 30,
+    'min_data_in_leaf':10,
+    'feature_fraction':0.7,
+    'learning_rate': 0.01,
+    'num_rounds': 300,
+    "early_stopping_round":30,
+    'seed': 1,
+    'verbosity':-1
+}
 ```
 ### Quantitative Analysis
 
-* Models were assessed primarily with AUC and AIR. See details below:
+* Model was assessed primarily with RMSE
 
 | Train AUC | Validation AUC | Test AUC |
 | ------ | ------- | -------- |
@@ -78,14 +87,9 @@ Table 1. AUC values across data partitions.
 | Asian vs. White | 1.098 |
 | Female vs. Male | 1.245 |
 
-Table 2. Validation AIR values for race and sex groups. 
-
-(**HINT**: Test AUC taken from https://github.com/jphall663/GWU_rml/blob/master/assignments/model_eval_2023_06_21_12_52_47.csv)
-
-#### Correlation Heatmap
-
-![Correlation Heatmap](download.png)
-
-Figure 1. Correlation heatmap for input features. 
+### Ethical Consideration
+* **Describe potential negative impacts of using your model:**: sales_train.csv, items.csv, shops.csv, categories.csv from *Predict Future Sales* competition
+* **Describe potential uncertainties relating to the impacts of using your model:**: 214,200
+* **Describe any unexpected or results**: Test does not contain item_cnt (the target variable)
 
 
