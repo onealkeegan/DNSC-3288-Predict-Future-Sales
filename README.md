@@ -20,7 +20,7 @@
 
 | Name | Modeling Role | Measurement Level| Description|
 | ---- | ------------- | ---------------- | ---------- |
-|**ID**| ID | int | an Id that represents a (Shop, Item) tuple within the test set |
+|**ID**| ID | int | an ID that represents a (Shop, Item) tuple within the test set |
 | **shop_id** | input | ID | unique identifier of a shop |
 | **item_id** | input | ID | unique identifier of a product |
 | **item_category_id** | ID | interval | unique identifier of item category |
