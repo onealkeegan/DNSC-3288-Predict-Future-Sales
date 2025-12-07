@@ -10,8 +10,7 @@
 * (https://github.com/onealkeegan/DNSC-3288-Predict-Future-Sales/blob/main/DNSC_3288_Predict_Future_Sales.ipynb) 
 
 ### Intended Use
-* **Primary intended uses**: (1) This model's intended use is to predict next-month item sales for a retail planning Kaggle competition
-*                            (2) Allow students to practice times-series forcasting 
+* **Primary intended uses**: (1) This model's intended use is to predict next-month item sales for a retail planning Kaggle competition (2) Allow students to practice times-series forcasting 
 * **Primary intended users**: Students in GWU DNSC 3288 class, future "Predict Future Sales" competitors
 * **Out-of-scope use cases**: Predictions for markets outside the original Kaggle dataset ex. groceries
 
