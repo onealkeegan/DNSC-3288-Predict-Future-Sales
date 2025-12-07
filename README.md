@@ -7,7 +7,7 @@
 * **Model version**: 9.0
 * **License**: MIT
 * **Model implementation code**: [DNSC-3288-Predict-Future-Sales.ipynb]
-* (https://github.com/onealkeegan/DNSC-3288-Predict-Future-Sales/blob/main/DNSC_3288_Predict_Future_Sales.ipynb) 
+* (https://www.kaggle.com/code/onealkeegan/dnsc3288-predict-future-sales)
 
 ### Intended Use
 * **Primary intended uses**: (1) This model's intended use is to predict next-month item sales for a retail planning Kaggle competition (2) Allow students to practice times-series forcasting 
