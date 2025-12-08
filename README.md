@@ -45,12 +45,127 @@
 
 ### Model details
 * **Columns used as inputs in the final model**:
-* Lag features (item_cnt_lag1to12, category_cnt_lag1to12, group_cnt_lag1to12)
-* Price aggregates
-* Count aggregates
-* Age features
-* Categorical identifiers (item_id, shop_id, category_id)
-* Month, shop city, item groups
+['shop_id',
+ 'item_id',
+ 'date_block_num',
+ 'first_sale_day',
+ 'month',
+ 'year',
+ 'day_quality',
+ 'category_id',
+ 'item_name_first4',
+ 'item_name_first6',
+ 'item_name_first11',
+ 'group_id',
+ 'shop_cluster',
+ 'shop_type',
+ 'shop_city',
+ 'prev_days_on_sale',
+ 'item_age',
+ 'item_name_first4_age',
+ 'item_name_first6_age',
+ 'item_name_first11_age',
+ 'category_age',
+ 'group_age',
+ 'shop_age',
+ 'item_age_if_shop_sale',
+ 'item_age_without_shop_sale',
+ 'item_cnt_all_shops',
+ 'item_cnt_all_shops_median',
+ 'category_cnt',
+ 'category_cnt_median',
+ 'category_cnt_all_shops',
+ 'category_cnt_all_shops_median',
+ 'group_cnt',
+ 'group_cnt_all_shops',
+ 'shop_cnt',
+ 'city_cnt',
+ 'new_items_in_cat',
+ 'new_items_in_cat_all_shops',
+ 'item_cnt_lag1',
+ 'item_cnt_lag2',
+ 'item_cnt_lag3',
+ 'item_cnt_lag6',
+ 'item_cnt_lag12',
+ 'item_cnt_all_shops_lag1',
+ 'item_cnt_all_shops_lag2',
+ 'item_cnt_all_shops_lag3',
+ 'item_cnt_all_shops_lag6',
+ 'item_cnt_all_shops_lag12',
+ 'category_cnt_lag1',
+ 'category_cnt_lag2',
+ 'category_cnt_lag3',
+ 'category_cnt_lag6',
+ 'category_cnt_lag12',
+ 'category_cnt_all_shops_lag1',
+ 'category_cnt_all_shops_lag2',
+ 'category_cnt_all_shops_lag3',
+ 'category_cnt_all_shops_lag6',
+ 'category_cnt_all_shops_lag12',
+ 'group_cnt_lag1',
+ 'group_cnt_lag2',
+ 'group_cnt_lag3',
+ 'group_cnt_lag6',
+ 'group_cnt_lag12',
+ 'group_cnt_all_shops_lag1',
+ 'group_cnt_all_shops_lag2',
+ 'group_cnt_all_shops_lag3',
+ 'group_cnt_all_shops_lag6',
+ 'group_cnt_all_shops_lag12',
+ 'shop_cnt_lag1',
+ 'shop_cnt_lag2',
+ 'shop_cnt_lag3',
+ 'shop_cnt_lag6',
+ 'shop_cnt_lag12',
+ 'city_cnt_lag1',
+ 'city_cnt_lag2',
+ 'city_cnt_lag3',
+ 'city_cnt_lag6',
+ 'city_cnt_lag12',
+ 'new_items_in_cat_lag1',
+ 'new_items_in_cat_lag2',
+ 'new_items_in_cat_lag3',
+ 'new_items_in_cat_lag6',
+ 'new_items_in_cat_lag12',
+ 'new_items_in_cat_all_shops_lag1',
+ 'new_items_in_cat_all_shops_lag2',
+ 'new_items_in_cat_all_shops_lag3',
+ 'new_items_in_cat_all_shops_lag6',
+ 'new_items_in_cat_all_shops_lag12',
+ 'item_rm3',
+ 'item_rm6',
+ 'item_rm12',
+ 'category_rm3',
+ 'category_rm6',
+ 'category_rm12',
+ 'shop_rm3',
+ 'shop_rm6',
+ 'shop_rm12',
+ 'item_cnt_diff',
+ 'item_cnt_all_shops_diff',
+ 'category_cnt_diff',
+ 'category_cnt_all_shops_diff',
+ 'category_price_lag1',
+ 'block_price_lag1',
+ 'item_price_lag1',
+ 'item_price_lag2',
+ 'price_delta',
+ 'price_ratio',
+ 'item_cnt_sum_alltime',
+ 'item_cnt_sum_alltime_allshops',
+ 'relative_price_item_block_lag1',
+ 'item_cnt_per_day_alltime',
+ 'item_cnt_per_day_alltime_allshops',
+ 'same_name4catage_cnt_all_shops',
+ 'same_name4catage_cnt',
+ 'same_name6catage_cnt_all_shops',
+ 'same_name6catage_cnt',
+ 'same_name11catage_cnt_all_shops',
+ 'same_name11catage_cnt',
+ 'below_item_cnt_all_shops_lag1',
+ 'above_item_cnt_all_shops_lag1',
+ 'below_item_cnt_all_shops_lag2',
+ 'above_item_cnt_all_shops_lag2']
 * **Column(s) used as target(s) in the final model**: "item_cnt"
 * **Type of model**: LightGBM Regression
 * **Software used to implement the model**: Python, LightGBM, NumPy, Pandas, Plotly, SHAP
@@ -78,43 +193,43 @@ params = {
 
 | Train RMSE | Validation RMSE |
 | ------ | ------- |
-| 0.6035 | 0.5517  |
+| 0.5639 | 0.5222  |
 
 Table 1. RMSE Per Month
 
 | Month | Training RMSE |
-|-------|-----|
-| 2  | 0.667765 |
-| 3  | 0.603433 |
-| 4  | 0.566605 |
-| 5  | 0.609390 |
-| 6  | 0.583677 |
-| 7  | 0.628294 |
-| 8  | 0.615719 |
-| 9  | 0.597084 |
-| 10 | 0.607769 |
-| 11 | 0.738983 |
-| 12 | 0.628255 |
-| 13 | 0.632644 |
-| 14 | 0.609606 |
-| 15 | 0.552822 |
-| 16 | 0.559833 |
-| 17 | 0.560788 |
-| 18 | 0.555500 |
-| 19 | 0.600944 |
-| 20 | 0.572158 |
-| 21 | 0.579527 |
-| 22 | 0.600553 |
-| 23 | 0.765158 |
-| 24 | 0.638652 |
-| 25 | 0.581953 |
-| 26 | 0.571159 |
-| 27 | 0.539051 |
-| 28 | 0.537635 |
-| 29 | 0.548998 |
-| 30 | 0.536134 |
-| 31 | 0.573818 |
-| 32 | 0.587106 |
+|-------|----------------|
+| 2  | 0.630577 |
+| 3  | 0.562119 |
+| 4  | 0.533294 |
+| 5  | 0.576405 |
+| 6  | 0.554529 |
+| 7  | 0.592284 |
+| 8  | 0.575049 |
+| 9  | 0.560159 |
+| 10 | 0.563038 |
+| 11 | 0.684111 |
+| 12 | 0.588343 |
+| 13 | 0.587203 |
+| 14 | 0.569536 |
+| 15 | 0.515059 |
+| 16 | 0.527807 |
+| 17 | 0.529246 |
+| 18 | 0.523801 |
+| 19 | 0.559758 |
+| 20 | 0.526745 |
+| 21 | 0.539508 |
+| 22 | 0.558932 |
+| 23 | 0.704694 |
+| 24 | 0.597537 |
+| 25 | 0.543416 |
+| 26 | 0.529460 |
+| 27 | 0.500136 |
+| 28 | 0.501292 |
+| 29 | 0.514481 |
+| 30 | 0.506873 |
+| 31 | 0.537613 |
+| 32 | 0.540547 |
 
 
 ### Ethical Consideration
