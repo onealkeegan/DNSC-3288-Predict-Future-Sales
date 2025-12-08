@@ -192,7 +192,7 @@ params = {
 * Model was assessed primarily with RMSE because RMSE uses the same units as the target variable, making it easier to understand the magnitude of the error.
 * RMSE is also the evaluation metric for the competition.
 
-### Kaggle Score:
+* **Kaggle Score**: 1.23283
 
 | Train RMSE | Validation RMSE |
 | ------ | ------- |
