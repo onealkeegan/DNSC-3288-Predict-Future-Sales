@@ -11,7 +11,7 @@
 
 ### Intended Use
 * **Primary intended uses**: (1) This model's intended use is to predict next-month item sales for a retail planning Kaggle competition (2) Allow students to practice times-series forcasting 
-* **Primary intended users**: Students in GWU DNSC 3288 class, future "Predict Future Sales" competitors
+* **Primary intended users**: (1) Students in GWU DNSC 3288 class (2) future "Predict Future Sales" competitors
 * **Out-of-scope use cases**: Predictions for markets outside the original Kaggle dataset ex. groceries
 
 ### Training Data
@@ -60,19 +60,21 @@
 params = {
     'objective': 'regression',
     'metric': 'rmse',
-    'num_leaves': 30,
-    'min_data_in_leaf':10,
-    'feature_fraction':0.7,
-    'learning_rate': 0.01,
-    'num_rounds': 300,
-    "early_stopping_round":30,
-    'seed': 1,
-    'verbosity':-1
+    'num_leaves': 120,
+    'min_data_in_leaf': 50,
+    'max_depth': 10,
+    'feature_fraction': 0.8,
+    'bagging_fraction': 0.8,
+    'bagging_freq': 1,
+    'learning_rate': 0.03,
+    'seed': 42,
+    'verbosity': -1
 }
 ```
 ### Quantitative Analysis
 
-* Model was assessed primarily with RMSE
+* Model was assessed primarily with RMSE because RMSE uses the same units as the target variable, making it easier to understand the magnitude of the error.
+* RMSE is also the evaluation metric for the competition.
 
 | Train RMSE | Validation RMSE |
 | ------ | ------- |
@@ -116,6 +118,6 @@ Table 1. RMSE Per Month
 
 
 ### Ethical Consideration
-* **Describe potential negative impacts of using your model:**: Inaccurate predictions could lead to overstocking and supply chain inefficiences. Our model does not account for seasonality changes or macroenvironment changes, so it may not be flexible to rapidly changing environments, and instead reinforce past demand biases rather than adapting to changes like a pandemic or holiday season. 
-* **Describe potential uncertainties relating to the impacts of using your model:**: The lack of real time  promotion data could cause the model's predictions to degrade quickly outside of the training environment since promotions & deals have a large impact on inventory and sales. 
+* **Describe potential negative impacts of using your model:**: Inaccurate predictions could lead to overstocking and supply chain inefficiences. Our model does not account for macroenvironment changes, so it may not be flexible to rapidly changing environments, and instead reinforce past demand biases rather than adapting to changes like a pandemic. 
+* **Describe potential uncertainties relating to the impacts of using your model:**: The lack of real time  promotion data could cause the model's predictions to fail quickly outside of the training environment since promotions & deals have a large impact on inventory and sales. 
 * **Describe any unexpected or results:**: The model occasionally produces extreme predictions on low-volume or newly introduced products, potentially causing misleading planning decisions. Clipping was applied to bound these predictions, but this may not show an accurate relationship in the real world. 
