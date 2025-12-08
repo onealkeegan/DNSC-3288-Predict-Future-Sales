@@ -175,15 +175,16 @@
 params = {
     'objective': 'regression',
     'metric': 'rmse',
-    'num_leaves': 120,
-    'min_data_in_leaf': 50,
-    'max_depth': 10,
+    'num_leaves': 100,
+    'min_data_in_leaf': 75,
+    'max_depth': 8,
     'feature_fraction': 0.8,
     'bagging_fraction': 0.8,
     'bagging_freq': 1,
-    'learning_rate': 0.03,
+    'learning_rate': 0.04,
     'seed': 42,
-    'verbosity': -1
+    'verbosity': -1,
+    'num_boost_round'=300
 }
 ```
 ### Quantitative Analysis
